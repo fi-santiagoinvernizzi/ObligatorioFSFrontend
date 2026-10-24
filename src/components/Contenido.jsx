@@ -6,7 +6,7 @@ import { obtenerPeliculasApi } from "../services/peliculasServices.js";
 import { cargarPeliculasSlice } from "../redux/features/peliculasSlice.js";
 
 import Agregar from "./Agregar.jsx";
-import Tareas from "./Tareas.jsx";
+import Peliculas from "./Peliculas.jsx";
 
 const Contenido = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const Contenido = () => {
 
     //llamamos al servicio de peliculas
     obtenerPeliculas();
-    
+
     //limpiar la llamada a la api cuando se destruya el componente
     return () => {controller.abort();};
   }, []);
@@ -38,7 +38,7 @@ const Contenido = () => {
   return (
     <div className="contenido">
       <Agregar />
-      <Tareas />
+      <Peliculas />
     </div>
   );
 };
