@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:3000/api/v1", //cambiar desp para q pegue al backend subido
+    baseURL: "https://obligatorio-fs-three.vercel.app/api/v1", 
     headers: {
         "Content-Type": "application/json"
     }
 });
 
-//interceptor de la peticion, moverlo a servicios de tareas
+//interceptor de la peticion
 api.interceptors.request.use((config) => {
     //busca en el localStorage el token
     const token = localStorage.getItem("token");

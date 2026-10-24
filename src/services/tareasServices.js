@@ -1,10 +1,6 @@
 import axios from "axios";
 
-
 const urlBase = "https://jsonplaceholder.typicode.com"
-
-
-
 
 export const obtenerTareasApi = async (signal) => {
 
