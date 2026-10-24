@@ -5,26 +5,13 @@ import Card from "react-bootstrap/Card";
 import React, { useState } from "react";
 import { loginApi } from "../services/authServices.js";
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [valores, setValores] = useState({
-    identificador: "homero",
-    password: "miclave",
+    identificador: "",
+    password: "",
   });
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    console.log("valores", valores);
-    try {
-      const resultado = await loginApi(valores);
-
-      const token = resultado.token;
-
-      console.log("token", token);
-      window.localStorage.setItem("token", token);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const auxValores = { ...valores };
@@ -33,42 +20,61 @@ const Login = () => {
     //aca hay que saber el type para saber si es un checkbox u otro tipo
     const value = type == "checkbox" ? e.target.checked : e.target.value;
     auxValores[name] = value; //se usa para saber quien ejecuto el evento
-    console.log("auxValores", auxValores);
+    
     setValores(auxValores);
   };
 
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const resultado = await loginApi(valores);
+      const token = resultado.token;
+
+      window.localStorage.setItem("token", token);
+
+      onLogin();
+      
+    } catch (error) {
+      console.error(error);
+      setError( error.response?.data?.message || "No se pudo iniciar sesión. Verificá tus credenciales.");
+    }
+  };
+
+  
+
   return (
-    <Card style={{ width: "18rem", justifyContent: "center" }}>
+    <Card style={{ width: "22rem", margin: "2rem auto" }}>
       <Card.Body>
-        <Form>
+        <Card.Title>Iniciar sesión</Card.Title>
+        <Form onSubmit={onSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Usuario o Email</Form.Label>
             <Form.Control
               type="email"
               name="identificador"
               value={valores.identificador}
-              placeholder="Enter email"
+              placeholder="Ingresa tu usuario o email"
               onChange={handleChange}
+              required
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Contraseña</Form.Label>
             <Form.Control
               type="password"
               name="password"
               value={valores.password}
-              placeholder="Password"
+              placeholder="Ingresa tu contraseña"
               onChange={handleChange}
+              required
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" onClick={onSubmit}>
-            Submit
-          </Button>
+          <Button variant="primary" type="submit">Iniciar sesión</Button>
         </Form>
       </Card.Body>
     </Card>
