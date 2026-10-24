@@ -1,8 +1,9 @@
 import api from "./authServices.js";
 
-export const obtenerPeliculasApi = async (filtros = {}) => {
+export const obtenerPeliculasApi = async (filtros = {}, signal) => {
   const resultado = await api.get("/movies", {
     params: filtros,
+    signal: signal,
   });
 
   return resultado.data;

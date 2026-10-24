@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+
+
+import { obtenerPeliculasApi } from "../services/peliculasServices.js";
+import { cargarPeliculasSlice } from "../redux/features/peliculasSlice.js";
+
 import Agregar from "./Agregar.jsx";
 import Tareas from "./Tareas.jsx";
-import { obtenerTareasApi } from "../services/tareasServices.js";
-import { cargarTareasInicialesSlice } from "../redux/features/tareasSlice.js";
 
 const Contenido = () => {
   const dispatch = useDispatch();
@@ -11,26 +14,25 @@ const Contenido = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    const obtenerTareas = async () => {
+    const obtenerPeliculas = async () => {
       try {
-        const listaTareas = await obtenerTareasApi(controller.signal);
-        dispatch(cargarTareasInicialesSlice(listaTareas));
+        const listaPeliculas = await obtenerPeliculasApi({}, controller.signal);
+        dispatch(cargarPeliculasSlice(listaPeliculas));
+
       } catch (error) {
         if (error.code === "ERR_CANCELED") {
           console.log("Petición cancelada");
           return;
         }
         console.error(error);
-        // setError("No se pudieron cargar los usuarios");
       }
     };
 
-    //llamamos al servicio de tareas
-    obtenerTareas();
+    //llamamos al servicio de peliculas
+    obtenerPeliculas();
+    
     //limpiar la llamada a la api cuando se destruya el componente
-    return () => {
-      controller.abort();
-    };
+    return () => {controller.abort();};
   }, []);
 
   return (
