@@ -21,9 +21,13 @@ const peliculasSlice = createSlice({
             state.peliculas = data;
             state.pagination = pagination;
         },
+        agregarPeliculaSlice: (state, action) => {
+            state.peliculas.push(action.payload);
+            state.pagination.total += 1;
+        },
     },
 });
 
-export const { cargarPeliculasSlice } = peliculasSlice.actions;
+export const { cargarPeliculasSlice, agregarPeliculaSlice } = peliculasSlice.actions;
 
 export default peliculasSlice.reducer;
