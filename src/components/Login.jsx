@@ -4,8 +4,11 @@ import Card from "react-bootstrap/Card";
 
 import React, { useState } from "react";
 import { loginApi } from "../services/authServices.js";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ onLogin }) => {
+const navigate = useNavigate();
+
+const Login = () => {
   const [valores, setValores] = useState({
     identificador: "",
     password: "",
@@ -17,13 +20,14 @@ const Login = ({ onLogin }) => {
     const auxValores = { ...valores };
     const name = e.target.name;
     const type = e.target.type;
-    //aca hay que saber el type para saber si es un checkbox u otro tipo
-    const value = type == "checkbox" ? e.target.checked : e.target.value;
-    auxValores[name] = value; //se usa para saber quien ejecuto el evento
-    
+    const value =
+      type == "checkbox" ? e.target.checked : e.target.value;
+
+    auxValores[name] = value;
     setValores(auxValores);
   };
 
+  const formularioValido = valores.identificador.trim() !== "" && valores.password.trim() !== "";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -34,26 +38,26 @@ const Login = ({ onLogin }) => {
       const token = resultado.token;
 
       window.localStorage.setItem("token", token);
-
-      onLogin();
-      
+      navigate("/dashboard");
     } catch (error) {
-      console.error(error);
-      setError( error.response?.data?.message || "No se pudo iniciar sesión. Verificá tus credenciales.");
+        console.error(error);
+        setError(
+          error.response?.data?.message ||
+            "No se pudo iniciar sesión. Verificá tus credenciales."
+        );
     }
   };
-
-  
 
   return (
     <Card style={{ width: "22rem", margin: "2rem auto" }}>
       <Card.Body>
         <Card.Title>Iniciar sesión</Card.Title>
+
         <Form onSubmit={onSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicIdentificador">
             <Form.Label>Usuario o Email</Form.Label>
             <Form.Control
-              type="email"
+              type="text"
               name="identificador"
               value={valores.identificador}
               placeholder="Ingresa tu usuario o email"
@@ -74,7 +78,15 @@ const Login = ({ onLogin }) => {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">Iniciar sesión</Button>
+          {error && <p className="text-danger">{error}</p>}
+
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={!formularioValido}
+          >
+            Iniciar sesión
+          </Button>
         </Form>
       </Card.Body>
     </Card>

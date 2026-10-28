@@ -1,18 +1,16 @@
+
 import "./App.css";
 import "./styles/estilos.css";
-
-import { useState, useEffect } from "react";
-import Dashboard from "./components/Dashboard.jsx";
-import Login from "./components/Login.jsx";
-
+import Menu from "./components/Menu.jsx";
+import Contenido from "./components/Contenido.jsx";
 
 const App = () => {
-  const [logueado, setLogueado] = useState( () => Boolean(window.localStorage.getItem("token")));
-  const manejarLogin = () => {
-    setLogueado(true);
-  };
-
-  return (<>{logueado ? (<Dashboard />) : (<Login onLogin={manejarLogin} />)}</>);
+  return (
+    <>
+      <Menu />
+      <Contenido />
+    </>
+  );
 };
 
 export default App;

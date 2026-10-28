@@ -1,15 +1,12 @@
-// import { useState, useRef } from "react";
-// import { agregarTareaSlice } from "../redux/features/tareasSlice.js";
-// import { useDispatch } from "react-redux";
-// import { crearTareaApi } from "../services/tareasServices.js";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { obtenerCategoriasApi } from "../services/categoriasServices.js";
+import { crearPeliculaApi } from "../services/peliculasServices.js";
+import { agregarPeliculaSlice } from "../redux/features/peliculasSlice.js";
 
 const Agregar = () => {
   const dispatch = useDispatch();
 
-  // const inputRef = useRef();
   const [categorias, setCategorias] = useState([]);
 
   const [valores, setValores] = useState({
@@ -19,12 +16,12 @@ const Agregar = () => {
     category: "",
   });
 
+  const [error, setError] = useState("");
+
   useEffect(() => {
     const obtenerCategorias = async () => {
       try {
         const resultado = await obtenerCategoriasApi();
-
-        console.log("Categorías recibidas:", resultado);
         setCategorias(resultado);
       } catch (error) {
         console.error("Error al obtener categorías:", error);
@@ -33,43 +30,53 @@ const Agregar = () => {
 
     obtenerCategorias();
   }, []);
-  
+
   const handleChange = (evento) => {
+    const auxValores = { ...valores };
     const name = evento.target.name;
     const value = evento.target.value;
 
-    const valoresAux = { ...valores };
-    valoresAux[name] = value;
-
-    setValores(valoresAux);
+    auxValores[name] = value;
+    setValores(auxValores);
   };
-  
-  // const agregarHandler = async (evento) => {
-  //   const title = inputRef.current.value;
-  //   // agregarTarea(title);
 
-  //   const tareaNueva = {
-  //     title,
-  //     userId: 1,
-  //   };
-
-  //   const tareaCreada = await crearTareaApi(tareaNueva);
-
-  //   //aca llamamos a la api que nos devuelve una tarea completa
-  //   //recien cuando salio todo bien llamamos al dispatch
-
-  //   dispatch(agregarTareaSlice(tareaCreada));
-
-  //   inputRef.current.value = "";
-  // };
-
-  const agregarHandler = (evento) => {
+  const agregarHandler = async (evento) => {
     evento.preventDefault();
+    setError("");
 
-    console.log("Datos del formulario:", valores);
+    const peliculaNueva = {
+      title: valores.title.trim(),
+      description: valores.description.trim(),
+      releaseYear: Number(valores.releaseYear),
+      category: valores.category,
+    };
+
+    if (!peliculaNueva.title || !peliculaNueva.description || !peliculaNueva.releaseYear || !peliculaNueva.category) {
+      setError("Todos los campos son obligatorios.");
+      return;
+    }
+
+    try {
+      const peliculaCreada = await crearPeliculaApi(peliculaNueva);
+
+      dispatch(agregarPeliculaSlice(peliculaCreada));
+
+      setValores({
+        title: "",
+        description: "",
+        releaseYear: "",
+        category: "",
+      });
+      
+    } catch (error) {
+      console.error("Error al crear película:", error);
+
+      setError(
+        error.response?.data?.message ||
+          "No se pudo crear la película."
+      );
+    }
   };
-
-
 
   return (
     <div className="agregar">
@@ -129,6 +136,8 @@ const Agregar = () => {
             ))}
           </select>
         </div>
+
+        {error && <p>{error}</p>}
 
         <button type="submit">Agregar película</button>
       </form>

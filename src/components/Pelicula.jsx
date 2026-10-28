@@ -1,8 +1,7 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import Borrar from "./Borrar.jsx";
 
 const Pelicula = (propiedades) => {
-  const dispatch = useDispatch();
 
   const { pelicula } = propiedades;
 
@@ -16,6 +15,8 @@ const Pelicula = (propiedades) => {
       <p>{description}</p>
       <p>Año: {releaseYear}</p>
       <p> Categoría: {category?.name || "Sin categoría"} </p>
+
+      <Borrar pelicula={pelicula} />
     </div>
   );
 };
