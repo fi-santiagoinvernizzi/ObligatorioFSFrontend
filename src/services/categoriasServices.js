@@ -3,7 +3,6 @@ import api from "./authServices.js";
 
 export const obtenerCategoriasApi = async () => {
   const resultado = await api.get("/categories");
-  console.log("Categorías recibidas:", resultado.data);
   return resultado.data;
 };
 

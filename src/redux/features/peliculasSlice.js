@@ -44,6 +44,8 @@ const peliculasSlice = createSlice({
     },
 });
 
-export const { cargarPeliculasSlice, agregarPeliculaSlice } = peliculasSlice.actions;
+
+export const { cargarPeliculasSlice, agregarPeliculaSlice, modificarPeliculaSlice, eliminarPeliculaSlice } = peliculasSlice.actions;
+
 
 export default peliculasSlice.reducer;

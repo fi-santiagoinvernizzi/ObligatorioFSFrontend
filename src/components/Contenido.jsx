@@ -33,7 +33,7 @@ const Contenido = () => {
 
     //limpiar la llamada a la api cuando se destruya el componente
     return () => {controller.abort();};
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="contenido">

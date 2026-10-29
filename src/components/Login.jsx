@@ -6,9 +6,9 @@ import React, { useState } from "react";
 import { loginApi } from "../services/authServices.js";
 import { useNavigate } from "react-router-dom";
 
-const navigate = useNavigate();
-
 const Login = () => {
+  const navigate = useNavigate();
+  
   const [valores, setValores] = useState({
     identificador: "",
     password: "",
@@ -87,6 +87,14 @@ const Login = () => {
           >
             Iniciar sesión
           </Button>
+
+          {/* Registro */}
+          <div className="mt-3">
+          <span>¿No tenés una cuenta? </span>
+          <Button variant="link" onClick={() => navigate("/registro")}>
+            Registrate
+          </Button>
+        </div>
         </Form>
       </Card.Body>
     </Card>

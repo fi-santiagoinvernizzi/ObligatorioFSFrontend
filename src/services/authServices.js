@@ -42,5 +42,11 @@ export const registrarUsuarioApi = async (dataUsuario) => {
 };
 
 
+export const cambiarPlanApi = async (datosPlan) => {
+    const resultado = await api.patch("/users/me/plan", datosPlan);
+    return resultado.data;
+};
+
+
 
 export default api;

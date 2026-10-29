@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { registrarUsuarioApi } from "../services/authServices.js";
 
-const navigate = useNavigate();
 
 const Registro = () => {
+  const navigate = useNavigate();
+  
   const [valores, setValores] = useState({
     name: "",
     username: "",

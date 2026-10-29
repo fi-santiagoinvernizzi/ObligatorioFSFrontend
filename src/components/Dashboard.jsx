@@ -8,7 +8,7 @@ const Dashboard = () => {
 
   const [estaLogueado, setEstaLogueado] = useState(false);
 
-  const validarLogin = () => {
+  useEffect(() => {
     const token = window.localStorage.getItem("token");
     const estaLogueado = token ? true : false;
 
@@ -17,11 +17,7 @@ const Dashboard = () => {
     } else {
       setEstaLogueado(estaLogueado);
     }
-  };
-
-  useEffect(() => {
-    validarLogin();
-  }, []);
+  }, [navigate]);
 
   return (
     <>

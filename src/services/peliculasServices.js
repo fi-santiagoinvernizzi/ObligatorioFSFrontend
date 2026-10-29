@@ -42,3 +42,9 @@ export const reemplazarPeliculaApi = async (idPelicula, pelicula) => {
 export const eliminarPeliculaApi = async (idPelicula) => {
   await api.delete(`/movies/${idPelicula}`);
 };
+
+export const eliminarPosterPersonalizadoApi = async (idPelicula) => {
+  const resultado = await api.delete(`/movies/${idPelicula}/poster`);
+  return resultado.data;
+};
+
