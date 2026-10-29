@@ -1,314 +1,308 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+/* ==================================================
+   1. VARIABLES Y CONFIGURACIÓN GENERAL
+================================================== */
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
-}
-
-
-/* nuevosEstilos */
-
-/* ==============================
-   PALETA GENERAL
-============================== */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --fondo: #14181c;
-  --panel: #202830;
-  --panel-hover: #28323b;
-  --borde: #35434c;
-  --texto: #e8edf0;
-  --texto-secundario: #aab5bd;
-  --verde: #00c030;
-  --verde-hover: #00a82a;
+  --bg: #111619;
+  --bg-secondary: #182126;
+  --surface: #202b31;
+  --surface-hover: #29363d;
+  --border: #34434a;
+
+  --green: #00c46a;
+  --green-hover: #00a85b;
+  --green-soft: rgba(0, 196, 106, 0.12);
+
+  --text: #edf3f2;
+  --muted: #9baaaa;
+  --danger: #ff6868;
+
+  --radius: 12px;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  background-color: var(--fondo);
-  color: var(--texto);
-  font-family: Arial, Helvetica, sans-serif;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 #root {
   min-height: 100vh;
 }
 
-/* ==============================
-   TITULOS
-============================== */
-
-h1, h2, h3 {
-  color: var(--texto);
-  font-weight: 600;
+h1, h2, h3, h4 {
+  font-family: 'Manrope', sans-serif;
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 h1 {
-  text-align: center;
-  font-size: 2rem;
-  margin: 25px 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
 }
 
 h2 {
-  font-size: 1.7rem;
+  font-size: 1.65rem;
 }
 
 h3 {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
+  font-size: 1.25rem;
 }
 
-/* ==============================
-   CONTENIDO PRINCIPAL
-============================== */
+p {
+  color: var(--muted);
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+/* ==================================================
+   2. BARRA SUPERIOR / MENÚ
+================================================== */
+
+/* Se aplican si el menú utiliza estas etiquetas o clases. */
+
+header,
+.menu,
+.navbar {
+  background: #182126 !important;
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+  padding: 14px 5%;
+}
+
+.navbar-brand,
+.navbar a,
+.menu a {
+  color: var(--text) !important;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navbar a:hover,
+.menu a:hover {
+  color: var(--green) !important;
+}
+
+/* ==================================================
+   3. CONTENIDO PRINCIPAL
+================================================== */
 
 .contenido {
-  width: min(1200px, 94%);
-  margin: 30px auto;
+  width: min(1250px, 92%);
+  margin: 0 auto;
+  padding: 35px 0 70px;
   display: flex;
   flex-direction: column;
   gap: 25px;
+  min-height: auto;
 }
 
-/* ==============================
-   FORMULARIO AGREGAR
-============================== */
+/* ==================================================
+   4. PANELES
+================================================== */
+
+.agregar,
+.informe-uso,
+.grafico-categorias {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.agregar h3,
+.informe-uso h3,
+.grafico-categorias h3 {
+  margin: 0 0 22px;
+  font-size: 1.4rem;
+}
+
+/* ==================================================
+   5. FORMULARIO AGREGAR PELÍCULA
+================================================== */
 
 .agregar {
-  background-color: var(--panel);
-  border: 1px solid var(--borde);
-  border-radius: 10px;
-  padding: 25px;
+  max-width: 850px;
   width: 100%;
-}
-
-.agregar h3 {
-  text-align: center;
-  font-size: 1.7rem;
-  margin-bottom: 25px;
-}
-
-.agregar form {
-  max-width: 650px;
   margin: 0 auto;
 }
 
-.agregar form > div {
-  margin-bottom: 16px;
+.agregar form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 22px;
 }
 
-.agregar label {
+.agregar form > div {
+  min-width: 0;
+  margin: 0;
+}
+
+/* Descripción y selector de imagen a ancho completo */
+
+.agregar form > div:nth-child(2),
+.agregar form > div:nth-child(5),
+.agregar form > div:nth-child(6) {
+  grid-column: 1 / -1;
+}
+
+.agregar label,
+.tarjeta form label {
   display: block;
   margin-bottom: 7px;
-  color: var(--texto-secundario);
-  font-size: 0.95rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
 }
 
 .agregar input,
 .agregar textarea,
 .agregar select,
+.tarjeta input,
+.tarjeta textarea,
 #filtroCategoria {
   width: 100%;
+  min-height: 43px;
   padding: 10px 12px;
-  border: 1px solid var(--borde);
-  border-radius: 6px;
-  background-color: #141a20;
-  color: var(--texto);
-  font-size: 0.95rem;
+  color: var(--text);
+  background: #11191d;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.agregar textarea {
-  min-height: 100px;
+.agregar textarea,
+.tarjeta textarea {
+  min-height: 110px;
   resize: vertical;
 }
 
 .agregar input:focus,
 .agregar textarea:focus,
 .agregar select:focus,
+.tarjeta input:focus,
+.tarjeta textarea:focus,
 #filtroCategoria:focus {
-  outline: none;
-  border-color: var(--verde);
-  box-shadow: 0 0 0 2px rgba(0, 192, 48, 0.15);
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px var(--green-soft);
 }
 
-/* ==============================
-   BOTONES
-============================== */
-
-button {
+.agregar input[type="file"] {
+  padding: 8px;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+}
+
+.agregar input[type="file"]::file-selector-button {
+  background: var(--surface-hover);
+  border: 0;
+  border-radius: 5px;
+  color: var(--text);
+  padding: 7px 12px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+/* ==================================================
+   6. BOTONES
+================================================== */
+
+button,
+.btn {
+  border-radius: 7px !important;
+  font-weight: 600 !important;
+  transition: background 0.2s, transform 0.2s !important;
 }
 
 .agregar button,
 .tarjeta button,
-.informe-uso button {
-  background-color: var(--verde);
-  color: #101810;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 16px;
-  font-weight: 600;
-  margin: 5px 5px 5px 0;
+.informe-uso button,
+button[type="submit"] {
+  background: var(--green);
+  border: 1px solid var(--green);
+  color: #07150e;
+  padding: 10px 17px;
 }
 
 .agregar button:hover,
 .tarjeta button:hover,
-.informe-uso button:hover {
-  background-color: var(--verde-hover);
+.informe-uso button:hover,
+button[type="submit"]:hover {
+  background: var(--green-hover);
+  border-color: var(--green-hover);
+  color: white;
   transform: translateY(-1px);
 }
 
 button:disabled {
-  opacity: 0.5;
+  opacity: 0.55;
   cursor: not-allowed;
+  transform: none !important;
 }
 
-/* ==============================
-   INFORME DE USO
-============================== */
+/* Botones secundarios */
+
+.tarjeta button[type="button"] {
+  background: var(--surface-hover);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.tarjeta button[type="button"]:hover {
+  background: #35464e;
+  border-color: var(--green);
+}
+
+/* ==================================================
+   7. INFORME DE USO
+================================================== */
 
 .informe-uso {
-  background-color: var(--panel);
-  border: 1px solid var(--borde);
-  border-radius: 10px;
-  padding: 25px;
   text-align: center;
 }
 
 .informe-uso h3 {
-  margin-bottom: 18px;
+  margin-bottom: 15px;
 }
 
 .informe-uso p {
-  color: var(--texto-secundario);
-  margin: 10px 0;
-  font-size: 1rem;
+  margin: 8px 0;
+  font-size: 0.96rem;
 }
 
 .informe-uso strong {
-  color: var(--verde);
-  font-size: 1.2rem;
+  color: var(--green);
+  font-size: 1.25rem;
 }
 
-/* ==============================
-   GRAFICO
-============================== */
+/* ==================================================
+   8. GRÁFICO
+================================================== */
 
 .grafico-categorias {
-  background-color: var(--panel);
-  border: 1px solid var(--borde);
-  border-radius: 10px;
-  padding: 25px;
   width: 100%;
 }
 
@@ -318,121 +312,202 @@ button:disabled {
 }
 
 .grafico-categorias canvas {
-  max-height: 350px;
+  width: 100% !important;
+  max-height: 360px;
 }
 
-/* ==============================
-   FILTRO Y LISTADO
-============================== */
+/* ==================================================
+   9. LISTADO Y FILTRO
+================================================== */
 
 #filtroCategoria {
-  max-width: 300px;
-  margin: 8px 0 20px;
+  display: block;
+  max-width: 280px;
+  margin: 10px 0 25px;
+  cursor: pointer;
 }
 
 .tarjetas {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 22px;
+  gap: 24px;
   width: 100%;
 }
 
-/* ==============================
-   TARJETAS DE PELICULAS
-============================== */
+/* Título del listado */
+
+.contenido > div > h3 {
+  margin-bottom: 18px;
+}
+
+/* ==================================================
+   10. TARJETAS DE PELÍCULAS
+================================================== */
 
 .tarjeta {
-  background-color: var(--panel);
-  border: 1px solid var(--borde);
-  border-radius: 9px;
+  min-width: 0;
   overflow: hidden;
-  padding: 12px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  transition: transform 0.2s, border-color 0.2s;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .tarjeta:hover {
   transform: translateY(-4px);
-  border-color: var(--verde);
+  border-color: rgba(0, 196, 106, 0.6);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
 }
 
-.tarjeta img {
+.tarjeta > img {
+  display: block;
   width: 100%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
-  border-radius: 5px;
-  margin-bottom: 12px;
-  background-color: #101418;
+  border-radius: 6px;
+  background: #0b1013;
+  margin-bottom: 13px;
 }
 
 .tarjeta h3 {
-  font-size: 1.1rem;
-  margin: 5px 0 10px;
+  font-size: 1.05rem;
+  margin: 4px 0 9px;
+  overflow-wrap: anywhere;
 }
 
 .tarjeta p {
-  color: var(--texto-secundario);
-  font-size: 0.9rem;
+  font-size: 0.87rem;
   line-height: 1.5;
+  margin: 5px 0;
 }
 
-.tarjeta button {
-  margin-top: 8px;
+.tarjeta p:last-of-type {
+  margin-bottom: 12px;
 }
 
-/* ==============================
-   FORMULARIO DE EDICION
-============================== */
+/* Botones dentro de las tarjetas */
+
+.tarjeta > button {
+  width: 100%;
+  margin: 5px 0 0;
+  padding: 9px 10px;
+  font-size: 0.85rem;
+}
+
+/* ==================================================
+   11. EDICIÓN DE PELÍCULAS
+================================================== */
 
 .tarjeta form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tarjeta form > div {
   width: 100%;
 }
 
-.tarjeta form label {
-  display: block;
-  margin: 10px 0 5px;
-  color: var(--texto-secundario);
-}
-
-.tarjeta form input,
-.tarjeta form textarea {
+.tarjeta form button {
   width: 100%;
-  padding: 9px;
-  border: 1px solid var(--borde);
-  border-radius: 5px;
-  background-color: #141a20;
-  color: var(--texto);
+  margin: 3px 0;
 }
 
-.tarjeta form textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-/* ==============================
-   MENSAJES
-============================== */
+/* ==================================================
+   12. MENSAJES Y VALIDACIONES
+================================================== */
 
 [role="alert"],
 .text-danger {
-  color: #ff7373;
+  color: var(--danger) !important;
+  font-size: 0.88rem;
 }
 
 .text-success {
-  color: var(--verde);
+  color: var(--green) !important;
 }
 
-/* ==============================
-   RESPONSIVE
-============================== */
+/* ==================================================
+   13. LOGIN Y REGISTRO
+================================================== */
 
-@media (max-width: 600px) {
+body:has(.card) {
+  background: var(--bg);
+}
+
+.card {
+  background: var(--bg-secondary) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  color: var(--text) !important;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+}
+
+.card label {
+  color: var(--muted);
+}
+
+.card input,
+.card textarea {
+  background: #11191d !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+}
+
+.card input:focus {
+  border-color: var(--green) !important;
+  box-shadow: 0 0 0 3px var(--green-soft) !important;
+}
+
+.card .btn-primary {
+  background: var(--green) !important;
+  border-color: var(--green) !important;
+  color: #07150e !important;
+}
+
+.card .btn-link {
+  color: var(--green) !important;
+}
+
+/* ==================================================
+   14. RESPONSIVE
+================================================== */
+
+@media (max-width: 768px) {
   .contenido {
     width: 94%;
-    margin: 18px auto;
+    padding-top: 22px;
     gap: 18px;
+  }
+
+  .agregar,
+  .informe-uso,
+  .grafico-categorias {
+    padding: 20px;
+  }
+
+  .tarjetas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+  }
+}
+
+@media (max-width: 520px) {
+  .agregar form {
+    grid-template-columns: 1fr;
+  }
+
+  .agregar form > div {
+    grid-column: 1 / -1;
   }
 
   .agregar,
@@ -443,19 +518,117 @@ button:disabled {
 
   .tarjetas {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 10px;
   }
 
   .tarjeta {
-    padding: 8px;
+    padding: 7px;
   }
 
   .tarjeta h3 {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
 
   .tarjeta p {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
+  }
+
+  .tarjeta button {
+    font-size: 0.77rem;
+    padding: 8px 5px;
   }
 }
 
+
+/* ==================================================
+   MENÚ PRINCIPAL
+================================================== */
+
+.menu {
+  width: 100%;
+  min-height: 76px;
+  background: #182126 !important;
+  border-bottom: 1px solid #34434a;
+  padding: 0 4%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.menu-contenido {
+  width: min(1250px, 100%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.menu-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-marca h2 {
+  color: #edf3f2;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-icono {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #00c46a;
+  color: #07150e;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.menu-cerrar-sesion {
+  padding: 9px 16px;
+  background: transparent !important;
+  color: #edf3f2 !important;
+  border: 1px solid #526169 !important;
+  border-radius: 7px !important;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu-cerrar-sesion:hover {
+  background: #29363d !important;
+  border-color: #00c46a !important;
+  color: #00c46a !important;
+}
+
+@media (max-width: 520px) {
+  .menu {
+    min-height: 65px;
+    padding: 0 4%;
+  }
+
+  .menu-marca h2 {
+    font-size: 1.1rem;
+  }
+
+  .menu-icono {
+    width: 33px;
+    height: 33px;
+    font-size: 1.1rem;
+  }
+
+  .menu-cerrar-sesion {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+  }
+}

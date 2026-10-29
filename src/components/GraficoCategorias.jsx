@@ -42,46 +42,51 @@ const GraficoCategorias = () => {
       {
         label: "Cantidad de películas",
         data: Object.values(cantidadPorCategoria),
-        backgroundColor: "#00c030",
-        borderColor: "#00a82a",
-        borderWidth: 1,
+        backgroundColor: "#00c46a",
+        borderColor: "#00c46a",
+        borderRadius: 5,
+        maxBarThickness: 65,
       },
       
     ],
   };
 
-  const opciones = {
+ const opciones = {
     responsive: true,
+    maintainAspectRatio: true,
     plugins: {
       legend: {
-        display: true,
+        labels: {
+          color: "#edf3f2",
+          font: {
+            family: "DM Sans",
+          },
+        },
       },
       title: {
-        display: true,
-        text: "Cantidad de películas por categoría",
+        display: false,
       },
-      color: "#e8edf0",
-        scales: {
-        x: {
-            ticks: {
-            color: "#aab5bd",
-            },
-            grid: {
-            color: "#35434c",
-            },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#aab8b8",
         },
-        y: {
-            beginAtZero: true,
-            ticks: {
-            color: "#aab5bd",
-            precision: 0,
-            stepSize: 1,
-            },
-            grid: {
-            color: "#35434c",
-            },
+        grid: {
+          color: "#34434a",
         },
+      },
+      y: {
+        beginAtZero: true,
+        ticks: {
+          color: "#aab8b8",
+          precision: 0,
+          stepSize: 1,
         },
+        grid: {
+          color: "#34434a",
+        },
+      },
     },
   };
 

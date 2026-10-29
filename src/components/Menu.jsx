@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,18 +5,28 @@ const Menu = () => {
   const navigate = useNavigate();
 
   const cerrarSesion = () => {
-    window.localStorage.removeItem("token");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/login");
   };
 
   return (
-    <div className="menu">
-      <h2>Mis peliculas</h2>
+    <header className="menu">
+      <div className="menu-contenido">
+        <div className="menu-marca">
+          <div className="menu-icono">M</div>
+          <h2>Mis películas</h2>
+        </div>
 
-      <button type="button" onClick={cerrarSesion}>
-        Cerrar sesión
-      </button>
-    </div>
+        <button
+          type="button"
+          className="menu-cerrar-sesion"
+          onClick={cerrarSesion}
+        >
+          Cerrar sesión
+        </button>
+      </div>
+    </header>
   );
 };
 

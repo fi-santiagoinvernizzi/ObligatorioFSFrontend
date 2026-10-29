@@ -1,91 +1,644 @@
-/*==app==*/
-@charset "UTF-8";
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+/* =========================================
+   CONFIGURACIÓN GENERAL
+========================================= */
+
+:root {
+  --fondo: #14181c;
+  --panel: #1e2329;
+  --panel-hover: #252c33;
+  --borde: #303840;
+  --verde: #00c46a;
+  --verde-hover: #00a85b;
+  --texto: #edf2f3;
+  --texto-secundario: #a3adb5;
+  --radio: 12px;
+  --sombra: 0 8px 28px rgba(0, 0, 0, 0.18);
+}
 
 * {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: "DM Sans", sans-serif;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  max-width: none;
+  margin: 0;
   padding: 0;
+  text-align: left;
+}
+
+h1, h2, h3, h4 {
+  color: var(--texto);
+  font-family: "Manrope", sans-serif;
+}
+
+p {
+  color: var(--texto-secundario);
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+/* =========================================
+   MENÚ SUPERIOR
+========================================= */
+
+.menu {
+  width: 100%;
+  min-height: 76px;
+  margin: 0;
+  padding: 0 4%;
+  display: flex;
+  align-items: center;
+  background: #1b2228 !important;
+  border-bottom: 1px solid var(--borde);
+}
+
+.menu-contenido {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.menu-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-marca h2 {
+  margin: 0;
+  color: var(--texto);
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.menu-icono {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: var(--verde);
+  color: #07150e;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.menu-cerrar-sesion {
+  padding: 9px 16px;
+  background: transparent;
+  color: var(--texto);
+  border: 1px solid #526169;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu-cerrar-sesion:hover {
+  color: var(--verde);
+  border-color: var(--verde);
+  background: var(--panel-hover);
+}
+
+/* =========================================
+   CONTENIDO Y DISTRIBUCIÓN PRINCIPAL
+========================================= */
+
+.contenido {
+  width: 100%;
+  max-width: 1600px;
+  min-height: auto;
+  margin: 0 auto;
+  padding: 32px 4% 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+/* Primera fila: Plan + Agregar */
+
+.fila-superior {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Segunda fila: Informe + Gráfico */
+
+.fila-estadisticas {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* =========================================
+   PANELES GENERALES
+========================================= */
+
+.panel-plan,
+.agregar,
+.informe-uso,
+.grafico-categorias,
+.seccion-listado {
+  min-width: 0;
+  padding: 26px;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.panel-plan,
+.agregar,
+.informe-uso,
+.grafico-categorias {
+  width: 100%;
+  max-width: none;
   margin: 0;
 }
 
-#root {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  background-color: #F0F0F0;
-  min-width: 1200px;
-  padding: 0;
-  max-width: 1280px;
-  margin: 0 auto;
-  text-align: center;
+.panel-plan h3,
+.agregar h3,
+.informe-uso h3,
+.grafico-categorias h3,
+.seccion-listado h3 {
+  margin: 0 0 18px;
+  font-size: 1.35rem;
+  font-weight: 700;
 }
 
-/* descomentar si se quiere evitar el centrado de vite */
-#root {
-  min-width: 95vw;
-  height: 100vh;
-}
-
-
-
-
-/*==menu==*/
-.menu {
-  width: 100%;
-  height: 72px;
-  background-color: #94C7BB;
-  margin-bottom: 20px;
-}
-
-.menu h2 {
-  padding-top: 20px;
-  text-align: center;
-}
-
-/*==contenido==*/
-.contenido {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0 20px;
-  min-height: 600px;
-}
-
-/*==Agregar==*/
-.agregar {
-  border: 1px solid #D7D7D7;
-  padding: 12px 16px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  background-color: #ffffff;
-}
-
-.agregar input {
-  font-family: 'Montserrat', sans-serif;
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #D7D7D7;
-}
-
-.agregar input[type='text'] {
-  width: 50%;
-}
-
-.agregar input[type='button'] {
-  width: 25%;
-}
-
-/*==Tarjeta==*/
-.tarjeta {
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #D7D7D7;
-  border-radius: 4px;
-  position: relative;
+.etiqueta-seccion {
+  display: block;
   margin-bottom: 8px;
+  color: var(--verde);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
 }
 
-input[type='checkbox']:checked+.checkLabel,
-label:has(input[type='checkbox']:checked) {
-  color: #9B9B9B;
-  text-decoration: line-through;
+/* =========================================
+   PANEL DEL PLAN
+========================================= */
+
+.panel-plan {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-height: 100%;
+}
+
+.plan-nombre {
+  margin: 5px 0;
+  color: var(--verde);
+  font-family: "Manrope", sans-serif;
+  font-size: 2.3rem;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.plan-descripcion {
+  margin: 8px 0 22px;
+  font-size: 0.95rem;
+}
+
+.estado-premium {
+  color: var(--verde);
+  font-weight: 600;
+}
+
+.boton-upgrade {
+  padding: 10px 18px !important;
+  background: var(--verde) !important;
+  border-color: var(--verde) !important;
+  color: #07150e !important;
+  font-weight: 700 !important;
+}
+
+.boton-upgrade:hover {
+  background: var(--verde-hover) !important;
+  border-color: var(--verde-hover) !important;
+}
+
+/* =========================================
+   FORMULARIO AGREGAR
+========================================= */
+
+.agregar form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 18px;
+}
+
+.agregar form > div {
+  min-width: 0;
+  margin: 0;
+}
+
+.agregar form > div:nth-child(2),
+.agregar form > div:nth-child(5),
+.agregar form > div:nth-child(6) {
+  grid-column: 1 / -1;
+}
+
+.agregar label,
+.tarjeta form label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--texto-secundario);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.agregar input,
+.agregar textarea,
+.agregar select,
+.tarjeta input,
+.tarjeta textarea,
+#filtroCategoria {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  color: var(--texto);
+  background: #151a1f;
+  border: 1px solid var(--borde);
+  border-radius: 7px;
+  outline: none;
+}
+
+.agregar textarea,
+.tarjeta textarea {
+  min-height: 95px;
+  resize: vertical;
+}
+
+.agregar input:focus,
+.agregar textarea:focus,
+.agregar select:focus,
+.tarjeta input:focus,
+.tarjeta textarea:focus,
+#filtroCategoria:focus {
+  border-color: var(--verde);
+  box-shadow: 0 0 0 3px rgba(0, 196, 106, 0.12);
+}
+
+.agregar input[type="file"] {
+  padding: 7px;
+}
+
+.agregar input[type="file"]::file-selector-button {
+  padding: 7px 12px;
+  margin-right: 10px;
+  color: var(--texto);
+  background: var(--panel-hover);
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+
+button,
+.btn {
+  border-radius: 7px !important;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.agregar button,
+.tarjeta button,
+button[type="submit"] {
+  padding: 10px 16px;
+  color: #07150e;
+  background: var(--verde);
+  border: 1px solid var(--verde);
+  cursor: pointer;
+}
+
+.agregar button:hover,
+.tarjeta button:hover,
+button[type="submit"]:hover {
+  color: white;
+  background: var(--verde-hover);
+  border-color: var(--verde-hover);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   INFORME DE USO
+========================================= */
+
+.informe-uso {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.informe-uso h3 {
+  margin-bottom: 20px;
+}
+
+.informe-uso p {
+  margin: 8px 0;
+  font-size: 0.96rem;
+}
+
+.informe-uso strong {
+  color: var(--verde);
+  font-size: 1.2rem;
+}
+
+/* =========================================
+   GRÁFICO POR CATEGORÍA
+========================================= */
+
+.grafico-categorias {
+  display: flex;
+  flex-direction: column;
+}
+
+.grafico-categorias h3 {
+  margin-bottom: 18px;
+}
+
+.grafico-categorias canvas {
+  width: 100% !important;
+  max-height: 300px;
+}
+
+/* =========================================
+   LISTADO DE PELÍCULAS
+========================================= */
+
+.seccion-listado {
+  width: 100%;
+}
+
+.encabezado-listado {
+  margin-bottom: 22px;
+}
+
+.encabezado-listado h3 {
+  margin-bottom: 0;
+}
+
+#filtroCategoria {
+  display: block;
+  max-width: 280px;
+  margin: 12px 0 22px;
+  cursor: pointer;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 22px;
+  width: 100%;
+}
+
+/* =========================================
+   TARJETAS INDIVIDUALES
+========================================= */
+
+.tarjeta {
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: #20272d;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 196, 106, 0.65);
+}
+
+.tarjeta > img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  margin-bottom: 12px;
+  object-fit: cover;
+  background: #101519;
+  border-radius: 6px;
+}
+
+.tarjeta h3 {
+  margin: 4px 0 8px;
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.tarjeta p {
+  margin: 5px 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.tarjeta > button {
+  width: 100%;
+  margin-top: 7px;
+  padding: 9px;
+  font-size: 0.84rem;
+}
+
+.tarjeta button[type="button"] {
+  color: var(--texto);
+  background: var(--panel-hover);
+  border: 1px solid var(--borde);
+}
+
+.tarjeta button[type="button"]:hover {
+  border-color: var(--verde);
+}
+
+/* =========================================
+   EDICIÓN DE PELÍCULAS
+========================================= */
+
+.tarjeta form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tarjeta form > div {
+  width: 100%;
+}
+
+.tarjeta form button {
+  width: 100%;
+  margin: 3px 0;
+}
+
+/* =========================================
+   MENSAJES
+========================================= */
+
+[role="alert"],
+.mensaje-error,
+.text-danger {
+  color: #ff7777 !important;
+  font-size: 0.88rem;
+}
+
+.text-success {
+  color: var(--verde) !important;
+}
+
+/* =========================================
+   LOGIN Y REGISTRO
+========================================= */
+
+.card {
+  color: var(--texto) !important;
+  background: var(--panel) !important;
+  border: 1px solid var(--borde) !important;
+  border-radius: var(--radio) !important;
+  box-shadow: var(--sombra);
+}
+
+.card-title {
+  color: var(--texto) !important;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+}
+
+.card label {
+  color: var(--texto-secundario);
+}
+
+.card input {
+  color: var(--texto) !important;
+  background: #151a1f !important;
+  border: 1px solid var(--borde) !important;
+}
+
+.card .btn-primary {
+  color: #07150e !important;
+  background: var(--verde) !important;
+  border-color: var(--verde) !important;
+}
+
+.card .btn-link {
+  color: var(--verde) !important;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .contenido {
+    padding: 24px 3% 45px;
+  }
+
+  .fila-superior,
+  .fila-estadisticas {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .panel-plan {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .menu {
+    min-height: 65px;
+    padding: 0 4%;
+  }
+
+  .menu-marca h2 {
+    font-size: 1.1rem;
+  }
+
+  .menu-icono {
+    width: 33px;
+    height: 33px;
+  }
+
+  .menu-cerrar-sesion {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+  }
+
+  .contenido {
+    padding: 18px 4% 35px;
+    gap: 18px;
+  }
+
+  .panel-plan,
+  .agregar,
+  .informe-uso,
+  .grafico-categorias,
+  .seccion-listado {
+    padding: 18px;
+  }
+
+  .agregar form {
+    grid-template-columns: 1fr;
+  }
+
+  .agregar form > div {
+    grid-column: 1 / -1;
+  }
+
+  .tarjetas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .tarjeta {
+    padding: 7px;
+  }
+
+  .tarjeta h3 {
+    font-size: 0.9rem;
+  }
+
+  .tarjeta p {
+    font-size: 0.77rem;
+  }
+
+  .tarjeta button {
+    padding: 8px 5px;
+    font-size: 0.75rem;
+  }
 }

@@ -1,14 +1,17 @@
-
-import "./App.css";
 import "./styles/estilos.css";
 import Menu from "./components/Menu.jsx";
 import Contenido from "./components/Contenido.jsx";
 
-const App = () => {
+const App = ({ usuario, onUpgrade, cargandoUpgrade, errorUpgrade }) => {
   return (
     <>
       <Menu />
-      <Contenido />
+      <Contenido
+        usuario={usuario}
+        onUpgrade={onUpgrade}
+        cargandoUpgrade={cargandoUpgrade}
+        errorUpgrade={errorUpgrade}
+      />
     </>
   );
 };

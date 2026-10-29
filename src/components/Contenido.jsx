@@ -4,12 +4,18 @@ import { useDispatch } from "react-redux";
 import { obtenerPeliculasApi } from "../services/peliculasServices.js";
 import { cargarPeliculasSlice } from "../redux/features/peliculasSlice.js";
 
+import Plan from "./Plan.jsx";
 import Agregar from "./Agregar.jsx";
 import Peliculas from "./Peliculas.jsx";
 import InformeUso from "./InformeUso.jsx";
 import GraficoCategorias from "./GraficoCategorias.jsx";
 
-const Contenido = () => {
+const Contenido = ({
+  usuario,
+  onUpgrade,
+  cargandoUpgrade,
+  errorUpgrade,
+}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,10 +30,7 @@ const Contenido = () => {
 
         dispatch(cargarPeliculasSlice(listaPeliculas));
       } catch (error) {
-        if (error.code === "ERR_CANCELED") {
-          console.log("Petición cancelada");
-          return;
-        }
+        if (error.code === "ERR_CANCELED") return;
 
         console.error(error);
       }
@@ -35,21 +38,35 @@ const Contenido = () => {
 
     obtenerPeliculas();
 
-    return () => {
-      controller.abort();
-    };
+    return () => controller.abort();
   }, [dispatch]);
 
   return (
-    <div className="contenido">
-      <Agregar />
+    <main className="contenido">
+      <section className="fila-superior">
+        <Plan
+          usuario={usuario}
+          onUpgrade={onUpgrade}
+          cargandoUpgrade={cargandoUpgrade}
+          error={errorUpgrade}
+        />
 
-      <InformeUso />
+        <Agregar />
+      </section>
 
-      <GraficoCategorias />
+      <section className="fila-estadisticas">
+        <InformeUso />
+        <GraficoCategorias />
+      </section>
 
-      <Peliculas />
-    </div>
+      <section className="seccion-listado">
+        <div className="encabezado-listado">
+          <span className="etiqueta-seccion">TU COLECCIÓN</span>
+        </div>
+
+        <Peliculas />
+      </section>
+    </main>
   );
 };
 
