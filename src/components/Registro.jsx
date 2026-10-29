@@ -44,7 +44,9 @@ const Registro = () => {
         const resultado = await registrarUsuarioApi(valores);
 
         localStorage.setItem("token", resultado.token);
+        window.localStorage.setItem("user", JSON.stringify(resultado.user));
         navigate("/dashboard");
+        
     } catch (error) {
         console.error("Error al registrar usuario:", error);
         setError(error.response?.data?.message || "No se pudo registrar el usuario.");

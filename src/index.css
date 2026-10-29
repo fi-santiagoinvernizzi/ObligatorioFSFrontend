@@ -109,3 +109,353 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+
+/* nuevosEstilos */
+
+/* ==============================
+   PALETA GENERAL
+============================== */
+
+:root {
+  --fondo: #14181c;
+  --panel: #202830;
+  --panel-hover: #28323b;
+  --borde: #35434c;
+  --texto: #e8edf0;
+  --texto-secundario: #aab5bd;
+  --verde: #00c030;
+  --verde-hover: #00a82a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ==============================
+   TITULOS
+============================== */
+
+h1, h2, h3 {
+  color: var(--texto);
+  font-weight: 600;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 25px 0;
+}
+
+h2 {
+  font-size: 1.7rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+/* ==============================
+   CONTENIDO PRINCIPAL
+============================== */
+
+.contenido {
+  width: min(1200px, 94%);
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* ==============================
+   FORMULARIO AGREGAR
+============================== */
+
+.agregar {
+  background-color: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 25px;
+  width: 100%;
+}
+
+.agregar h3 {
+  text-align: center;
+  font-size: 1.7rem;
+  margin-bottom: 25px;
+}
+
+.agregar form {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.agregar form > div {
+  margin-bottom: 16px;
+}
+
+.agregar label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--texto-secundario);
+  font-size: 0.95rem;
+}
+
+.agregar input,
+.agregar textarea,
+.agregar select,
+#filtroCategoria {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background-color: #141a20;
+  color: var(--texto);
+  font-size: 0.95rem;
+}
+
+.agregar textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.agregar input:focus,
+.agregar textarea:focus,
+.agregar select:focus,
+#filtroCategoria:focus {
+  outline: none;
+  border-color: var(--verde);
+  box-shadow: 0 0 0 2px rgba(0, 192, 48, 0.15);
+}
+
+/* ==============================
+   BOTONES
+============================== */
+
+button {
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.agregar button,
+.tarjeta button,
+.informe-uso button {
+  background-color: var(--verde);
+  color: #101810;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: 600;
+  margin: 5px 5px 5px 0;
+}
+
+.agregar button:hover,
+.tarjeta button:hover,
+.informe-uso button:hover {
+  background-color: var(--verde-hover);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==============================
+   INFORME DE USO
+============================== */
+
+.informe-uso {
+  background-color: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+}
+
+.informe-uso h3 {
+  margin-bottom: 18px;
+}
+
+.informe-uso p {
+  color: var(--texto-secundario);
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+.informe-uso strong {
+  color: var(--verde);
+  font-size: 1.2rem;
+}
+
+/* ==============================
+   GRAFICO
+============================== */
+
+.grafico-categorias {
+  background-color: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 25px;
+  width: 100%;
+}
+
+.grafico-categorias h3 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.grafico-categorias canvas {
+  max-height: 350px;
+}
+
+/* ==============================
+   FILTRO Y LISTADO
+============================== */
+
+#filtroCategoria {
+  max-width: 300px;
+  margin: 8px 0 20px;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 22px;
+  width: 100%;
+}
+
+/* ==============================
+   TARJETAS DE PELICULAS
+============================== */
+
+.tarjeta {
+  background-color: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 9px;
+  overflow: hidden;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);
+  border-color: var(--verde);
+}
+
+.tarjeta img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  background-color: #101418;
+}
+
+.tarjeta h3 {
+  font-size: 1.1rem;
+  margin: 5px 0 10px;
+}
+
+.tarjeta p {
+  color: var(--texto-secundario);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.tarjeta button {
+  margin-top: 8px;
+}
+
+/* ==============================
+   FORMULARIO DE EDICION
+============================== */
+
+.tarjeta form {
+  width: 100%;
+}
+
+.tarjeta form label {
+  display: block;
+  margin: 10px 0 5px;
+  color: var(--texto-secundario);
+}
+
+.tarjeta form input,
+.tarjeta form textarea {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid var(--borde);
+  border-radius: 5px;
+  background-color: #141a20;
+  color: var(--texto);
+}
+
+.tarjeta form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ==============================
+   MENSAJES
+============================== */
+
+[role="alert"],
+.text-danger {
+  color: #ff7373;
+}
+
+.text-success {
+  color: var(--verde);
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 600px) {
+  .contenido {
+    width: 94%;
+    margin: 18px auto;
+    gap: 18px;
+  }
+
+  .agregar,
+  .informe-uso,
+  .grafico-categorias {
+    padding: 16px;
+  }
+
+  .tarjetas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .tarjeta {
+    padding: 8px;
+  }
+
+  .tarjeta h3 {
+    font-size: 0.95rem;
+  }
+
+  .tarjeta p {
+    font-size: 0.82rem;
+  }
+}
+

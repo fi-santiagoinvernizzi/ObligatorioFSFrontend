@@ -38,7 +38,9 @@ const Login = () => {
       const token = resultado.token;
 
       window.localStorage.setItem("token", token);
+      window.localStorage.setItem("user", JSON.stringify(resultado.user));
       navigate("/dashboard");
+      
     } catch (error) {
         console.error(error);
         setError(
