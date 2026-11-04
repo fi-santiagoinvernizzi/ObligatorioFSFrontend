@@ -3,12 +3,14 @@ import { useDispatch } from "react-redux";
 
 import { obtenerPeliculasApi } from "../services/peliculasServices.js";
 import { cargarPeliculasSlice } from "../redux/features/peliculasSlice.js";
+import AdministrarCategorias from "./AdministrarCategorias.jsx";
 
 import Plan from "./Plan.jsx";
 import Agregar from "./Agregar.jsx";
 import Peliculas from "./Peliculas.jsx";
 import InformeUso from "./InformeUso.jsx";
 import GraficoCategorias from "./GraficoCategorias.jsx";
+
 
 const Contenido = ({
   usuario,
@@ -43,29 +45,35 @@ const Contenido = ({
 
   return (
     <main className="contenido">
-      <section className="fila-superior">
-        <Plan
-          usuario={usuario}
-          onUpgrade={onUpgrade}
-          cargandoUpgrade={cargandoUpgrade}
-          error={errorUpgrade}
-        />
+      {usuario?.role === "admin" ? (
+        <AdministrarCategorias />
+      ) : (
+        <>
+          <section className="fila-superior">
+            <Plan
+              usuario={usuario}
+              onUpgrade={onUpgrade}
+              cargandoUpgrade={cargandoUpgrade}
+              error={errorUpgrade}
+            />
 
-        <Agregar />
-      </section>
+            <Agregar />
+          </section>
 
-      <section className="fila-estadisticas">
-        <InformeUso />
-        <GraficoCategorias />
-      </section>
+          <section className="fila-estadisticas">
+            <InformeUso />
+            <GraficoCategorias />
+          </section>
 
-      <section className="seccion-listado">
-        <div className="encabezado-listado">
-          <span className="etiqueta-seccion">TU COLECCIÓN</span>
-        </div>
+          <section className="seccion-listado">
+            <div className="encabezado-listado">
+              <span className="etiqueta-seccion">TU COLECCIÓN</span>
+            </div>
 
-        <Peliculas />
-      </section>
+            <Peliculas />
+          </section>
+        </>
+      )}
     </main>
   );
 };

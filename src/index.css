@@ -632,3 +632,253 @@ body:has(.card) {
     font-size: 0.78rem;
   }
 }
+
+
+/* =========================================
+   REGISTRO Y AUTENTICACIÓN
+========================================= */
+
+.pagina-autenticacion {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fondo, #14181c);
+}
+
+.registro-panel {
+  width: 100%;
+  max-width: 480px;
+  padding: 38px;
+  background: var(--panel, #1e2329);
+  border: 1px solid var(--borde, #303840);
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.registro-encabezado {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.registro-logo {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--verde, #00c46a);
+  color: #07150e;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.registro-encabezado h1 {
+  margin: 0 0 8px;
+  color: var(--texto, #edf2f3);
+  font-family: "Manrope", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.registro-encabezado p {
+  margin: 0;
+  color: var(--texto-secundario, #a3adb5);
+  font-size: 0.92rem;
+}
+
+.registro-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.campo-registro {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.campo-registro label {
+  color: var(--texto, #edf2f3);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.campo-registro input {
+  width: 100%;
+  min-height: 45px;
+  padding: 11px 13px;
+  color: var(--texto, #edf2f3);
+  background: #151a1f;
+  border: 1px solid var(--borde, #303840);
+  border-radius: 7px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo-registro input::placeholder {
+  color: #68747d;
+}
+
+.campo-registro input:focus {
+  border-color: var(--verde, #00c46a);
+  box-shadow: 0 0 0 3px rgba(0, 196, 106, 0.12);
+}
+
+.registro-boton {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 5px;
+  color: #07150e;
+  background: var(--verde, #00c46a);
+  border: 1px solid var(--verde, #00c46a);
+  border-radius: 7px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.registro-boton:hover:not(:disabled) {
+  background: var(--verde-hover, #00a85b);
+  transform: translateY(-1px);
+}
+
+.registro-boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.registro-error {
+  margin: 0;
+  color: #ff7777;
+  font-size: 0.85rem;
+}
+
+.registro-pie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--borde, #303840);
+  color: var(--texto-secundario, #a3adb5);
+  font-size: 0.9rem;
+}
+
+.registro-pie button {
+  padding: 0;
+  color: var(--verde, #00c46a);
+  background: transparent;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.registro-pie button:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .pagina-autenticacion {
+    padding: 20px 14px;
+  }
+
+  .registro-panel {
+    padding: 25px 20px;
+  }
+
+  .registro-encabezado h1 {
+    font-size: 1.55rem;
+  }
+}
+
+
+.administrar-categorias {
+  width: 100%;
+  padding: 28px;
+  background: #181818;
+  border: 1px solid #303030;
+  border-radius: 12px;
+}
+
+.administrar-categorias h2 {
+  margin-bottom: 24px;
+}
+
+.administrar-categorias form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: none;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: #202020;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.administrar-categorias form > div {
+  width: 100%;
+}
+
+.administrar-categorias form input,
+.administrar-categorias form textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.administrar-categorias input,
+.administrar-categorias textarea {
+  width: 100%;
+  padding: 12px;
+  color: #fff;
+  background: #242424;
+  border: 1px solid #444;
+  border-radius: 6px;
+}
+
+.administrar-categorias textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.administrar-categorias button {
+  padding: 10px 16px;
+  margin: 4px;
+  color: #fff;
+  background: #303030;
+  border: 1px solid #555;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.administrar-categorias button:hover {
+  background: #444;
+}
+
+.categoria-admin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid #333;
+}
+
+.categoria-admin h4 {
+  margin-bottom: 6px;
+}
+
+.categoria-admin p {
+  color: #aaa;
+}

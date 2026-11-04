@@ -5,7 +5,7 @@ import { registrarUsuarioApi } from "../services/authServices.js";
 
 const Registro = () => {
   const navigate = useNavigate();
-  
+
   const [valores, setValores] = useState({
     name: "",
     username: "",
@@ -28,110 +28,131 @@ const Registro = () => {
   const contrasenasCoinciden =
     valores.password === valores.confirmPassword;
 
-  const formularioValido =
-    valores.name.trim() !== "" &&
-    valores.username.trim() !== "" &&
-    valores.email.trim() !== "" &&
-    valores.password !== "" &&
-    valores.confirmPassword !== "" &&
-    contrasenasCoinciden;
+  const formularioValido = valores.name.trim() !== "" && valores.username.trim() !== "" && valores.email.trim() !== "" &&
+                           valores.password !== "" && valores.confirmPassword !== "" && contrasenasCoinciden;
 
   const registrarHandler = async (evento) => {
     evento.preventDefault();
     setError("");
 
     try {
-        const resultado = await registrarUsuarioApi(valores);
+      const resultado = await registrarUsuarioApi(valores);
 
-        localStorage.setItem("token", resultado.token);
-        window.localStorage.setItem("user", JSON.stringify(resultado.user));
-        navigate("/dashboard");
-        
+      localStorage.setItem("token", resultado.token);
+      localStorage.setItem("user", JSON.stringify(resultado.user));
+
+      navigate("/dashboard");
     } catch (error) {
-        console.error("Error al registrar usuario:", error);
-        setError(error.response?.data?.message || "No se pudo registrar el usuario.");
-}
+      console.error("Error al registrar usuario:", error);
+      setError(error.response?.data?.message || "No se pudo registrar el usuario.");
+    }
   };
 
   return (
-    <div>
-      <h2>Registro</h2>
-
-      <form onSubmit={registrarHandler}>
-        <div>
-          <label htmlFor="name">Nombre:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={valores.name}
-            onChange={handleChange}
-            required
-          />
+    <main className="pagina-autenticacion">
+      <section className="registro-panel">
+        <div className="registro-encabezado">
+          <div className="registro-logo">M</div>
+          <h1>Crear cuenta</h1>
+          <p>Registrate para comenzar a organizar tu colección.</p>
         </div>
 
-        <div>
-          <label htmlFor="username">Usuario:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={valores.username}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <form onSubmit={registrarHandler} className="registro-formulario">
+          <div className="campo-registro">
+            <label htmlFor="name">Nombre</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={valores.name}
+              onChange={handleChange}
+              placeholder="Tu nombre"
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor="email">Correo electrónico:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={valores.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="campo-registro">
+            <label htmlFor="username">Usuario</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={valores.username}
+              onChange={handleChange}
+              placeholder="Elegí un nombre de usuario"
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor="password">Contraseña:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={valores.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="campo-registro">
+            <label htmlFor="email">Correo electrónico</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={valores.email}
+              onChange={handleChange}
+              placeholder="nombre@ejemplo.com"
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor="confirmPassword">
-            Repetir contraseña:
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={valores.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="campo-registro">
+            <label htmlFor="password">Contraseña</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={valores.password}
+              onChange={handleChange}
+              placeholder="Ingresá tu contraseña"
+              required
+            />
+          </div>
 
-        {!contrasenasCoinciden &&
-          valores.confirmPassword !== "" && (
-            <p>Las contraseñas no coinciden.</p>
+          <div className="campo-registro">
+            <label htmlFor="confirmPassword">Confirmar contraseña</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={valores.confirmPassword}
+              onChange={handleChange}
+              placeholder="Repetí tu contraseña"
+              required
+            />
+          </div>
+
+          {!contrasenasCoinciden &&
+            valores.confirmPassword !== "" && (
+              <p className="registro-error">
+                Las contraseñas no coinciden.
+              </p>
+            )}
+
+          {error && (
+            <p className="registro-error" role="alert">
+              {error}
+            </p>
           )}
 
-        {error && <p>{error}</p>}
+          <button
+            type="submit"
+            className="registro-boton"
+            disabled={!formularioValido}
+          >
+            Registrarse
+          </button>
+        </form>
 
-        <button type="submit" disabled={!formularioValido}>
-          Registrarse
-        </button>
-      </form>
-    </div>
+        <div className="registro-pie">
+          <span>¿Ya tenés una cuenta?</span>
+          <button type="button" onClick={() => navigate("/login")}>
+            Iniciar sesión
+          </button>
+        </div>
+      </section>
+    </main>
   );
 };
 

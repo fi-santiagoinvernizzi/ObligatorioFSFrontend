@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { obtenerCategoriasApi } from "../services/categoriasServices.js";
+import { obtenerCategoriasApi} from "../services/categoriasServices.js";
 import { crearPeliculaApi } from "../services/peliculasServices.js";
 import { agregarPeliculaSlice } from "../redux/features/peliculasSlice.js";
 import SubirImagen from "./SubirImagen.jsx";
@@ -65,8 +65,10 @@ const Agregar = () => {
       };
 
       try {
-        const peliculaCreada = await crearPeliculaApi(peliculaNueva);
+        const respuesta = await crearPeliculaApi(peliculaNueva);
 
+        const peliculaCreada = {...respuesta, _id: respuesta._id || respuesta.id,};
+        
         dispatch(agregarPeliculaSlice(peliculaCreada));
 
         resetForm();
@@ -75,11 +77,7 @@ const Agregar = () => {
       } catch (error) {
         console.error("Error al crear película:", error);
 
-        setError(
-          error.response?.data?.message ||
-            error.response?.data?.error ||
-            "No se pudo crear la película."
-        );
+        setError(error.response?.data?.message || error.response?.data?.error || "No se pudo crear la película.");
       }
     },
   });
