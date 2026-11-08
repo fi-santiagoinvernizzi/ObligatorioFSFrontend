@@ -17,6 +17,7 @@ const SubirImagen = ({ handleImgURL, resetKey }) => {
     setError("");
     handleImgURL(null);
     setImagenSubida(false);
+    setInputKey((valor) => valor + 1); // Cambiar la clave del input para reiniciar el valor y no aparezca Imagen.jpg anterior
   }, [resetKey]);
 
   useEffect(() => {
