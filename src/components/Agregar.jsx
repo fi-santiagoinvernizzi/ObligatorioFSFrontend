@@ -31,7 +31,7 @@ const esquemaValidacion = Yup.object({
 });
 
 
-const Agregar = () => {
+const Agregar = ({ usuario }) => {
   const dispatch = useDispatch();
 
   const listaPeliculas = useSelector(
