@@ -1,12 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { limpiarPeliculasSlice } from "../redux/features/peliculasSlice.js";
 import { useNavigate } from "react-router-dom";
 
 const Menu = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const cerrarSesion = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    dispatch(limpiarPeliculasSlice());
+    
     navigate("/login");
   };
 

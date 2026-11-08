@@ -41,11 +41,15 @@ const peliculasSlice = createSlice({
 
             state.pagination.total -= 1;
         },
-    },
-});
+        
+        limpiarPeliculasSlice: () => initialState,
+
+            },
+    });
 
 
-export const { cargarPeliculasSlice, agregarPeliculaSlice, modificarPeliculaSlice, eliminarPeliculaSlice } = peliculasSlice.actions;
+export const { cargarPeliculasSlice, agregarPeliculaSlice, modificarPeliculaSlice, eliminarPeliculaSlice
+    , limpiarPeliculasSlice, } = peliculasSlice.actions;
 
 
 export default peliculasSlice.reducer;

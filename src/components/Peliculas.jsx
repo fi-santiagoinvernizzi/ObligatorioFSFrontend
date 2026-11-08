@@ -20,14 +20,16 @@ const Peliculas = () => {
         ])
     ).values(),
   ];
+  
+  const categoriaActiva = categorias.some( (categoria) => categoria._id === categoriaSeleccionada ) 
+                          ? categoriaSeleccionada 
+                          : "todas";
 
+  
   const peliculasFiltradas =
-    categoriaSeleccionada === "todas"
+    categoriaActiva === "todas"
       ? listaPeliculas
-      : listaPeliculas.filter(
-          (pelicula) =>
-            pelicula.category?._id === categoriaSeleccionada
-        );
+      : listaPeliculas.filter( (pelicula) => pelicula.category?._id === categoriaActiva );
 
   return (
     <div>
@@ -38,9 +40,10 @@ const Peliculas = () => {
           Filtrar por categoría:
         </label>
 
+        
         <select
           id="filtroCategoria"
-          value={categoriaSeleccionada}
+          value={categoriaActiva}
           onChange={(e) => setCategoriaSeleccionada(e.target.value)}
         >
           <option value="todas">Todas las categorías</option>

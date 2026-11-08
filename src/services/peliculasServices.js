@@ -1,13 +1,39 @@
 import api from "./authServices.js";
 
+// export const obtenerPeliculasApi = async (filtros = {}, signal) => {
+//   const resultado = await api.get("/movies", {
+//     params: filtros,
+//     signal: signal,
+//   });
+
+//   return resultado.data;
+// };
+
+//cambio con paginacion
 export const obtenerPeliculasApi = async (filtros = {}, signal) => {
-  const resultado = await api.get("/movies", {
-    params: filtros,
+  const respuesta = await api.get("/movies", {
+    params: { ...filtros, page: 1, limit: 10 },
     signal: signal,
   });
 
-  return resultado.data;
+  const peliculas = [...respuesta.data.data];
+  const totalPaginas = respuesta.data.pagination.totalPages;
+
+  for (let pagina = 2; pagina <= totalPaginas; pagina++) {
+    const siguienteRespuesta = await api.get("/movies", {
+      params: { ...filtros, page: pagina, limit: 10 },
+      signal: signal,
+    });
+
+    peliculas.push(...siguienteRespuesta.data.data);
+  }
+
+  return {
+    data: peliculas,
+    pagination: respuesta.data.pagination,
+  };
 };
+
 
 export const obtenerPeliculaApi = async (idPelicula) => {
   const resultado = await api.get(`/movies/${idPelicula}`);

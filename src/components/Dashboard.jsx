@@ -3,9 +3,15 @@ import App from "../App.jsx";
 import { useNavigate } from "react-router-dom";
 import { cambiarPlanApi } from "../services/usersServices.js";
 
+import { useDispatch } from "react-redux";
+import { limpiarPeliculasSlice } from "../redux/features/peliculasSlice.js";
+import { programarVencimiento, cancelarVencimiento } from "../utils/sesion.js";
+
+
 const Dashboard = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  
   const [estaLogueado, setEstaLogueado] = useState(false);
 
   const [usuario, setUsuario] = useState(() => {
@@ -21,14 +27,26 @@ const Dashboard = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
-    if (!token) {
-      navigate("/login");
-    } else {
+      if (!token) {
+          navigate("/login");
+          return;
+      }
+
+      programarVencimiento(token, () => {
+          localStorage.removeItem("user");
+          dispatch(limpiarPeliculasSlice());
+          navigate("/login", { replace: true });
+      });
+
       setEstaLogueado(true);
-    }
-  }, [navigate]);
+
+      return () => {
+          cancelarVencimiento();
+      };
+  }, [navigate, dispatch]);
+
 
   const upgradePlan = async () => {
     setError("");

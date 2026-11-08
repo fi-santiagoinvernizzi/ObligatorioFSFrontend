@@ -4,22 +4,32 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import SubirImagen from "./SubirImagen.jsx";
 
-import { modificarPeliculaApi, eliminarPeliculaApi, eliminarPosterPersonalizadoApi, } from "../services/peliculasServices.js";
+
+import { obtenerPeliculaApi, modificarPeliculaApi, eliminarPeliculaApi, 
+          eliminarPosterPersonalizadoApi } from "../services/peliculasServices.js";
 
 import { modificarPeliculaSlice, eliminarPeliculaSlice,} from "../redux/features/peliculasSlice.js";
+
 
 const esquemaValidacion = Yup.object({
   title: Yup.string()
     .trim()
+    .max(150, "El título no puede superar los 150 caracteres.")
     .required("El título es obligatorio."),
+
   description: Yup.string()
     .trim()
+    .max(1000, "La descripción no puede superar los 1000 caracteres.")
     .required("La descripción es obligatoria."),
+
   releaseYear: Yup.number()
     .typeError("El año debe ser un número.")
     .integer("El año debe ser un número entero.")
+    .min(1888, "El año no puede ser anterior a 1888.")
+    .max(new Date().getFullYear(), "El año no puede ser posterior al actual.")
     .required("El año de estreno es obligatorio."),
 });
+
 
 const Pelicula = ({ pelicula }) => {
   const {
@@ -67,19 +77,31 @@ const Pelicula = ({ pelicula }) => {
           peliculaModificada
         );
 
-        const peliculaActualizada = {
+        let peliculaActualizada = {
           ...pelicula,
           ...respuesta,
           _id: respuesta.id || respuesta._id || pelicula._id,
           category: pelicula.category,
-          ...(posterSubido && {
-            posterPersonalizado: posterSubido.url,
-            posterCloudinaryId: posterSubido.public_id,
-            poster: posterSubido.url,
-          }),
+          ...(posterSubido && { posterPersonalizado: posterSubido.url, posterCloudinaryId: posterSubido.public_id, 
+                                poster: posterSubido.url,}
+              ),
         };
 
+        try {
+          const peliculaCompleta = await obtenerPeliculaApi(pelicula._id);
+
+          peliculaActualizada = {
+            ...peliculaActualizada,
+            ...peliculaCompleta,
+            _id: peliculaCompleta._id || peliculaCompleta.id || pelicula._id,
+          };
+        } catch (error) {
+          console.error("No se pudo actualizar el póster:", error);
+          setError("La película se modificó, pero no se pudo actualizar el póster. Recargá la página.");
+        }
+
         dispatch(modificarPeliculaSlice(peliculaActualizada));
+
         setPosterSubido(null);
         setEditando(false);
 

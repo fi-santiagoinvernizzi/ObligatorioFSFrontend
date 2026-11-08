@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,  } from "react";
 import { useNavigate } from "react-router-dom";
 import { registrarUsuarioApi } from "../services/authServices.js";
 
@@ -25,11 +25,19 @@ const Registro = () => {
     setValores(auxValores);
   };
 
-  const contrasenasCoinciden =
-    valores.password === valores.confirmPassword;
+  
+const nombreValido = valores.name.trim().length >= 3 && valores.name.trim().length <= 30;
 
-  const formularioValido = valores.name.trim() !== "" && valores.username.trim() !== "" && valores.email.trim() !== "" &&
-                           valores.password !== "" && valores.confirmPassword !== "" && contrasenasCoinciden;
+const usuarioValido = /^[a-zA-Z0-9]{3,30}$/.test(valores.username.trim()); //solo letras y números, entre 3 y 30 caracteres
+
+const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valores.email.trim()); //formato mail
+
+const contrasenaValida = valores.password.length >= 3 && valores.password.length <= 30;
+
+const contrasenasCoinciden = valores.password === valores.confirmPassword;
+
+const formularioValido = nombreValido && usuarioValido && emailValido && contrasenaValida 
+                          && valores.confirmPassword !== "" && contrasenasCoinciden;
 
   const registrarHandler = async (evento) => {
     evento.preventDefault();

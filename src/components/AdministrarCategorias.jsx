@@ -1,23 +1,22 @@
-
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import {
-  obtenerCategoriasApi,
-  crearCategoriaApi,
-  modificarCategoriaApi,
-  eliminarCategoriaApi,
-} from "../services/categoriasServices.js";
+import { obtenerCategoriasApi, crearCategoriaApi, modificarCategoriaApi, 
+          eliminarCategoriaApi,} from "../services/categoriasServices.js";
 
 const esquemaValidacion = Yup.object({
   name: Yup.string()
     .trim()
+    .max(50, "El nombre no puede superar los 50 caracteres.")
     .required("El nombre de la categoría es obligatorio."),
+
   description: Yup.string()
     .trim()
+    .max(255, "La descripción no puede superar los 255 caracteres.")
     .required("La descripción es obligatoria."),
 });
+
 
 const AdministrarCategorias = () => {
   const [categorias, setCategorias] = useState([]);
@@ -31,10 +30,7 @@ const AdministrarCategorias = () => {
       const resultado = await obtenerCategoriasApi();
       setCategorias(resultado);
     } catch (error) {
-      setMensaje(
-        error.response?.data?.message ||
-        "No se pudieron cargar las categorías."
-      );
+      setMensaje( error.response?.data?.message || "No se pudieron cargar las categorías." );
     }
   };
 
@@ -89,17 +85,12 @@ const AdministrarCategorias = () => {
 
   // Edición de categorías
   const handlerEditar = (categoria) => {
-    setErrores((anteriores) => ({
-      ...anteriores,
-      [categoria.id || categoria._id]: "",
-    }));
+    setErrores((anteriores) => ({ ...anteriores, [categoria.id || categoria._id]: "", }));
 
     setCategorias((anteriores) =>
       anteriores.map((item) => ({
         ...item,
-        editando:
-          (item.id || item._id) ===
-          (categoria.id || categoria._id),
+        editando: (item.id || item._id) === (categoria.id || categoria._id),
       }))
     );
   };
@@ -149,10 +140,7 @@ const AdministrarCategorias = () => {
     } catch (error) {
       setErrores((anteriores) => ({
         ...anteriores,
-        [idCategoria]:
-          error.response?.data?.message ||
-          error.response?.data?.error ||
-          "No se pudo modificar la categoría.",
+        [idCategoria]: error.response?.data?.message || error.response?.data?.error || "No se pudo modificar la categoría.",
       }));
     }
   };
@@ -185,10 +173,7 @@ const AdministrarCategorias = () => {
     } catch (error) {
       setErrores((anteriores) => ({
         ...anteriores,
-        [idCategoria]:
-          error.response?.data?.message ||
-          error.response?.data?.error ||
-          "No se pudo eliminar la categoría.",
+        [idCategoria]: error.response?.data?.message || error.response?.data?.error || "No se pudo eliminar la categoría.",
       }));
     }
   };
@@ -281,14 +266,7 @@ const AdministrarCategorias = () => {
 };
 
 // Formulario de cada categoría, definido en el mismo archivo
-const CategoriaFila = ({
-  categoria,
-  error,
-  handlerEditar,
-  handlerCancelar,
-  handlerGuardar,
-  handlerBorrar,
-}) => {
+const CategoriaFila = ({ categoria, error, handlerEditar, handlerCancelar, handlerGuardar, handlerBorrar,}) => {
   const formik = useFormik({
     initialValues: {
       name: categoria.name || "",

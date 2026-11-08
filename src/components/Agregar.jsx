@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector  } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { obtenerCategoriasApi} from "../services/categoriasServices.js";
@@ -7,23 +7,38 @@ import { crearPeliculaApi } from "../services/peliculasServices.js";
 import { agregarPeliculaSlice } from "../redux/features/peliculasSlice.js";
 import SubirImagen from "./SubirImagen.jsx";
 
+
 const esquemaValidacion = Yup.object({
   title: Yup.string()
     .trim()
+    .max(150, "El título no puede superar los 150 caracteres.")
     .required("El título es obligatorio."),
+
   description: Yup.string()
     .trim()
+    .max(1000, "La descripción no puede superar los 1000 caracteres.")
     .required("La descripción es obligatoria."),
+
   releaseYear: Yup.number()
     .typeError("El año debe ser un número.")
     .integer("El año debe ser un número entero.")
+    .min(1888, "El año no puede ser anterior a 1888.")
+    .max(new Date().getFullYear(), "El año no puede ser posterior al actual.")
     .required("El año de estreno es obligatorio."),
+
   category: Yup.string()
     .required("Seleccioná una categoría."),
 });
 
+
 const Agregar = () => {
   const dispatch = useDispatch();
+
+  const listaPeliculas = useSelector(
+    (state) => state.peliculasSlice.peliculas
+  );
+
+  const limiteAlcanzado = usuario?.plan === "plus" && listaPeliculas.length >= 4;
   const [categorias, setCategorias] = useState([]);
   const [error, setError] = useState("");
   const [posterPersonalizado, setPosterPersonalizado] = useState(null);
@@ -167,8 +182,14 @@ const Agregar = () => {
         )}
 
         {error && <p role="alert">{error}</p>}
+        
+        {limiteAlcanzado && (
+          <p role="alert">
+            Alcanzaste el límite de 4 películas del plan Plus. Pasá a Premium para agregar más películas.
+          </p>
+        )}
 
-        <button type="submit" disabled={formik.isSubmitting}>
+        <button type="submit" disabled={formik.isSubmitting || limiteAlcanzado}>
           {formik.isSubmitting ? "Agregando..." : "Agregar película"}
         </button>
       </form>

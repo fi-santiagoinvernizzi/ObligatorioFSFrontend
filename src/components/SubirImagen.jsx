@@ -82,7 +82,7 @@ const SubirImagen = ({ handleImgURL, resetKey }) => {
             url: resultado.secure_url,
             public_id: resultado.public_id,
         });
-      setImagenSubida(false);
+      setImagenSubida(true);
     } catch (error) {
       console.error("Error al subir la imagen:", error);
 
