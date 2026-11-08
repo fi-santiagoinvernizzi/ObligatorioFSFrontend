@@ -1,0 +1,14 @@
+# Dependencias
+node_modules/
+
+# Archivos generados
+dist/
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Sistema operativo y editor
+.DS_Store
+.vscode/
