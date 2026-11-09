@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import App from "../App.jsx";
 import { useNavigate } from "react-router-dom";
 import { cambiarPlanApi } from "../services/usersServices.js";
-
 import { useDispatch } from "react-redux";
 import { limpiarPeliculasSlice } from "../redux/features/peliculasSlice.js";
 import { programarVencimiento, cancelarVencimiento } from "../utils/sesion.js";
@@ -16,8 +15,10 @@ const Dashboard = () => {
 
   const [usuario, setUsuario] = useState(() => {
     try {
+
       const usuarioGuardado = localStorage.getItem("user");
       return usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
+
     } catch {
       return null;
     }
@@ -42,9 +43,7 @@ const Dashboard = () => {
 
       setEstaLogueado(true);
 
-      return () => {
-          cancelarVencimiento();
-      };
+      return () => { cancelarVencimiento(); };
   }, [navigate, dispatch]);
 
 
@@ -57,14 +56,15 @@ const Dashboard = () => {
 
       setUsuario(usuarioActualizado);
       localStorage.setItem("user", JSON.stringify(usuarioActualizado));
+
     } catch (error) {
-      console.error("Error al actualizar el plan:", error);
 
       setError(
         error.response?.data?.message ||
         error.response?.data?.error ||
         "No se pudo actualizar el plan."
       );
+      
     } finally {
       setCargandoUpgrade(false);
     }

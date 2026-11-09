@@ -170,11 +170,14 @@ const AdministrarCategorias = () => {
       );
 
       setMensaje("Categoría eliminada correctamente.");
+
     } catch (error) {
+
       setErrores((anteriores) => ({
         ...anteriores,
         [idCategoria]: error.response?.data?.message || error.response?.data?.error || "No se pudo eliminar la categoría.",
       }));
+      
     }
   };
 
@@ -191,7 +194,7 @@ const AdministrarCategorias = () => {
       </div>
 
       {formularioAbierto && (
-        <form onSubmit={formikCrear.handleSubmit}>
+        <form onSubmit={formikCrear.handleSubmit} noValidate>
           <h3>Crear categoría</h3>
 
           <div>
@@ -205,7 +208,7 @@ const AdministrarCategorias = () => {
               onBlur={formikCrear.handleBlur}
               required
             />
-            {formikCrear.touched.name && formikCrear.errors.name && (
+            {formikCrear.submitCount > 0 && formikCrear.errors.name && (
               <p role="alert">{formikCrear.errors.name}</p>
             )}
           </div>
@@ -220,10 +223,9 @@ const AdministrarCategorias = () => {
               onBlur={formikCrear.handleBlur}
               required
             />
-            {formikCrear.touched.description &&
-              formikCrear.errors.description && (
+            {formikCrear.submitCount > 0 && formikCrear.errors.description && (
                 <p role="alert">{formikCrear.errors.description}</p>
-              )}
+            )}
           </div>
 
           <button type="submit" disabled={cargandoCrear}>
@@ -280,7 +282,7 @@ const CategoriaFila = ({ categoria, error, handlerEditar, handlerCancelar, handl
   return (
     <article className="categoria-admin">
       {categoria.editando ? (
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} noValidate>
           <div>
             <label htmlFor={`nombre-${categoria.id || categoria._id}`}>
               Nombre:
@@ -293,7 +295,7 @@ const CategoriaFila = ({ categoria, error, handlerEditar, handlerCancelar, handl
               onBlur={formik.handleBlur}
               required
             />
-            {formik.touched.name && formik.errors.name && (
+            {formik.submitCount > 0 && formik.errors.name && (
               <p role="alert">{formik.errors.name}</p>
             )}
           </div>
@@ -310,10 +312,9 @@ const CategoriaFila = ({ categoria, error, handlerEditar, handlerCancelar, handl
               onBlur={formik.handleBlur}
               required
             />
-            {formik.touched.description &&
-              formik.errors.description && (
+            {formik.submitCount > 0 && formik.errors.description && (
                 <p role="alert">{formik.errors.description}</p>
-              )}
+            )}
           </div>
 
           {error && <p role="alert">{error}</p>}
@@ -324,7 +325,10 @@ const CategoriaFila = ({ categoria, error, handlerEditar, handlerCancelar, handl
 
           <button
             type="button"
-            onClick={() => handlerCancelar(categoria.id || categoria._id)}
+            onClick={() => {
+              formik.resetForm();
+              handlerCancelar(categoria.id || categoria._id);
+            }}
           >
             Cancelar
           </button>

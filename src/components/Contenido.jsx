@@ -22,10 +22,7 @@ const Contenido = ({ usuario, onUpgrade, cargandoUpgrade, errorUpgrade,}) => {
 
     const obtenerPeliculas = async () => {
       try {
-        const listaPeliculas = await obtenerPeliculasApi(
-          {},
-          controller.signal
-        );
+        const listaPeliculas = await obtenerPeliculasApi( {}, controller.signal );
 
         dispatch(cargarPeliculasSlice(listaPeliculas));
       

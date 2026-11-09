@@ -101,7 +101,7 @@ const Agregar = ({ usuario }) => {
     <div className="agregar">
       <h3>Agregar película</h3>
 
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} noValidate>
         <div>
           <label htmlFor="title">Título:</label>
           <input
@@ -113,7 +113,7 @@ const Agregar = ({ usuario }) => {
             onBlur={formik.handleBlur}
             required
           />
-          {formik.touched.title && formik.errors.title && (
+          {formik.submitCount > 0 && formik.errors.title && (
             <p role="alert">{formik.errors.title}</p>
           )}
         </div>
@@ -128,7 +128,7 @@ const Agregar = ({ usuario }) => {
             onBlur={formik.handleBlur}
             required
           />
-          {formik.touched.description && formik.errors.description && (
+          {formik.submitCount > 0 && formik.errors.description && (
             <p role="alert">{formik.errors.description}</p>
           )}
         </div>
@@ -144,7 +144,7 @@ const Agregar = ({ usuario }) => {
             onBlur={formik.handleBlur}
             required
           />
-          {formik.touched.releaseYear && formik.errors.releaseYear && (
+          {formik.submitCount > 0 && formik.errors.releaseYear && (
             <p role="alert">{formik.errors.releaseYear}</p>
           )}
         </div>
@@ -167,7 +167,7 @@ const Agregar = ({ usuario }) => {
               </option>
             ))}
           </select>
-          {formik.touched.category && formik.errors.category && (
+          {formik.submitCount > 0 && formik.errors.category && (
             <p role="alert">{formik.errors.category}</p>
           )}
         </div>
