@@ -13,7 +13,7 @@ import {
 
 import { Bar } from "react-chartjs-2";
 
-ChartJS.register(
+ChartJS.register(  
   CategoryScale,
   LinearScale,
   BarElement,
@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-const GraficoCategorias = () => {
+const GraficoCategorias = () => { 
   const listaPeliculas = useSelector(
     (state) => state.peliculasSlice.peliculas
   );
@@ -36,9 +36,9 @@ const GraficoCategorias = () => {
       (cantidadPorCategoria[nombreCategoria] || 0) + 1;
   });
 
-  const datos = {
+  const datos = {//config para datos de grafico
     labels: Object.keys(cantidadPorCategoria),
-    datasets: [
+    datasets: [ 
       {
         label: "Cantidad de películas",
         data: Object.values(cantidadPorCategoria),
@@ -51,7 +51,7 @@ const GraficoCategorias = () => {
     ],
   };
 
- const opciones = {
+ const opciones = { //config para opciones de grafico
     responsive: true,
     maintainAspectRatio: true,
     plugins: {

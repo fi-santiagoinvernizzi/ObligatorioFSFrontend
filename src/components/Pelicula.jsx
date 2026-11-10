@@ -41,8 +41,7 @@ const Pelicula = ({ pelicula }) => {
     posterCloudinaryId,
   } = pelicula;
 
-  const posterAMostrar =
-    posterPersonalizado || pelicula.poster || pelicula.posterTMDB;
+  const posterAMostrar = posterPersonalizado || pelicula.poster || pelicula.posterTMDB;
 
   const [editando, setEditando] = useState(false);
   const [error, setError] = useState("");
@@ -109,8 +108,7 @@ const Pelicula = ({ pelicula }) => {
         console.error("Error al modificar película:", error);
 
         setError(
-          error.response?.data?.message ||
-            "No se pudo modificar la película."
+          error.response?.data?.message || "No se pudo modificar la película."
         );
       }
     },
@@ -155,8 +153,7 @@ const Pelicula = ({ pelicula }) => {
       console.error("Error al eliminar película:", error);
 
       setError(
-        error.response?.data?.message ||
-          "No se pudo eliminar la película."
+        error.response?.data?.message || "No se pudo eliminar la película."
       );
     } finally {
       setEliminando(false);

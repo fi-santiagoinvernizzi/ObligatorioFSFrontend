@@ -20,8 +20,7 @@ const Login = () => {
     const auxValores = { ...valores };
     const name = e.target.name;
     const type = e.target.type;
-    const value =
-      type == "checkbox" ? e.target.checked : e.target.value;
+    const value = type == "checkbox" ? e.target.checked : e.target.value;
 
     auxValores[name] = value;
     setValores(auxValores);
@@ -44,8 +43,7 @@ const Login = () => {
     } catch (error) {
         console.error(error);
         setError(
-          error.response?.data?.message ||
-            "No se pudo iniciar sesión. Verificá tus credenciales."
+          error.response?.data?.message || "No se pudo iniciar sesión. Verificá tus credenciales."
         );
     }
   };

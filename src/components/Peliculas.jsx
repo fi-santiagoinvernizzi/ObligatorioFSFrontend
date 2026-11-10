@@ -30,10 +30,9 @@ const Peliculas = () => {
                           : "todas";
 
   
-  const peliculasFiltradas =
-    categoriaActiva === "todas"
-      ? listaPeliculas
-      : listaPeliculas.filter( (pelicula) => pelicula.category?._id === categoriaActiva );
+  const peliculasFiltradas = categoriaActiva === "todas"
+                            ? listaPeliculas
+                            : listaPeliculas.filter( (pelicula) => pelicula.category?._id === categoriaActiva );
 
   
   const totalPaginas = Math.ceil( peliculasFiltradas.length / peliculasPorPagina);
